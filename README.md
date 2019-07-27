@@ -1,2 +1,3 @@
 # StrategyShow
-StrategyShow
+
+begin write
