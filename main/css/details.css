@@ -1,0 +1,15 @@
+.heading{
+    font-weight:bold
+}
+.xxx-searchBox{
+    background-color: #fafafa !important;
+    padding: 30px 0;
+}
+.xxx-form-margin{
+    margin: 20px 0;
+}
+.xxx-contentBox{
+    margin-top: 50px;
+    margin-bottom: 80px;
+    background-color: #fafafa !important;
+}
