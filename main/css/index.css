@@ -8,3 +8,8 @@
 .xxx-form-margin{
     margin: 20px 0;
 }
+.xxx-contentBox{
+    margin-top: 50px;
+    margin-bottom: 80px;
+    background-color: #fafafa !important;
+}
