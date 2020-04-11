@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    　　<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <style type="text/css">
+        .hide {
+            display: none;
+        }
+
+        .shadow {
+            /*绝对定位*/
+            position: fixed;
+            /*沾满全屏*/
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            /*黑色背景*/
+            background-color: black;
+            /*透明度*/
+            opacity: 0.3;
+            /*越大越展示在用户前面*/
+            z-index: 999;
+        }
+
+        .model {
+            z-index: 1000;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            height: 300px;
+            width: 400px;
+            margin-left: -200px;
+            margin-top: -150px;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<a onclick="showModal();"> 模块对话框添加</a>
+
+<div class="shadow hide" id="shadow"></div>
+
+<div class="model hide" id="model">
+<!--    from 表单提交页面必定刷新，请求必定再次请求一次，这样可以在viws函数中，不使用重定向也可以，直接在view再次render-->
+<!-- 若想不刷新，保留对话框的形式，只能使用ajax偷偷提交数据，偷偷改变数据  -->
+        <p>
+            <input type="text" id="title">
+        </p>
+        <input type="button" onclick="AjaxSend();">
+</div>
+
+<script>
+    function showModal() {
+        document.getElementById("shadow").classList.remove("hide")
+        document.getElementById("model").classList.remove("hide")
+    }
+
+    function AjaxSend() {
+        $.ajax({
+            url:'/modal_add/',
+            type:"POST",
+            data:{
+                "title":$("title").val()
+            },
+            success:function (data) {
+                //当服务端处理完成后，返回数据时，该函数自动调用
+                // data代表服务器给我们返回的值
+                // 可以使用 JavaScript进行html的内容修改展示内容，或者刷新界面
+                console.log(data)
+                if(data == "ok"){
+
+                };
+                if (data == "okk"){
+
+                }
+                if(data == "okkk"){
+                    location.href = "/重定向的界面/"
+                //    可以使用JavaScript用做重定向页面
+                }
+            }
+        })
+    //    如果使用ajax，djangoviews后台，使用redi重定向，无法进行跳转。
+    //    只能使用httpresponse返回给JavaScript的ajax接受数据，data
+    }
+
+
+// 新URL处理数据，对于数据量大，展示界面大的比较好。
+
+//    如果量少的话，可以使用模特对话框、配合ajax进行异步请求发送和修改html数据，或者跳转刷新。
+</script>
+</body>
+</html>
