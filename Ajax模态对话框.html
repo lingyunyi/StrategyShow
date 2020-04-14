@@ -63,32 +63,41 @@
         document.getElementById("model").classList.remove("hide")
     }
 
-    function AjaxSend() {
+function AjaxSend() {
         $.ajax({
-            url:'/modal_add/',
-            type:"POST",
-            data:{
-                "title":$("title").val()
+            url: '/admins/login/',
+            type: "POST",
+            data: {
+                "adminis_account": $("adminis_account").val(),
+                "adminis_passwd": $("adminis_passwd").val(),
             },
-            success:function (data) {
+            // 设置超时的时间XXs
+            timeout: 30000,
+            success: function (data) {
                 //当服务端处理完成后，返回数据时，该函数自动调用
                 // data代表服务器给我们返回的值
                 // 可以使用 JavaScript进行html的内容修改展示内容，或者刷新界面
                 console.log(data)
-                if(data == "ok"){
-
-                };
-                if (data == "okk"){
-
+                // 登入成功
+                if (data == "200") {
+                    location.href = "/admins/index/"
                 }
-                if(data == "okkk"){
-                    location.href = "/重定向的界面/"
-                //    可以使用JavaScript用做重定向页面
+                ;
+                // 失败
+                if (data == "404") {
+                    alert("账号或密码错误"); //弹出提示
                 }
+                ;
+                if (data == "300") {
+                    alert("账号密码不能为空"); //弹出提示
+                }
+            },
+            //调用出错执行的函数
+            error: function () {
+                //请求出错处理
+                console.log("error");
             }
         })
-    //    如果使用ajax，djangoviews后台，使用redi重定向，无法进行跳转。
-    //    只能使用httpresponse返回给JavaScript的ajax接受数据，data
     }
 
 
